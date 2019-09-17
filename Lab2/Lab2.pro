@@ -18,6 +18,7 @@ SOURCES += src/Lab2.cpp
 
 DISTFILES += qml/Lab2.qml \
     qml/cover/CoverPage.qml \
+    qml/pages/Dialog.qml \
     qml/pages/FirstPage.qml \
     rpm/Lab2.changes.in \
     rpm/Lab2.changes.run.in \

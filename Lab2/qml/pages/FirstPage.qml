@@ -11,6 +11,14 @@ Page {
     SilicaFlickable {
         anchors.fill: parent
 
+        // PullDownMenu and PushUpMenu must be declared in SilicaFlickable, SilicaListView or SilicaGridView
+        PullDownMenu {
+            MenuItem {
+                text: qsTr("Show Dialog")
+                onClicked: pageStack.push(Qt.resolvedUrl("Dialog.qml"))
+            }
+        }
+
         // Tell SilicaFlickable the height of its content.
         contentHeight: column.height
 
@@ -102,6 +110,116 @@ Page {
                 Rectangle { width: column.recSize; height: column.recSize; color: "magenta" }
                 Rectangle { width: column.recSize; height: column.recSize; color: "transparent" }
                 Rectangle { width: column.recSize; height: column.recSize; color: "black" }
+            }
+
+            // Task 6
+            Label {
+                x: Theme.horizontalPageMargin
+                text: qsTr("Task 6")
+                color: Theme.secondaryHighlightColor
+                font.pixelSize: Theme.fontSizeExtraLarge
+            }
+
+            Rectangle {
+                width: 2 * column.recSize
+                height: 2 * column.recSize
+                color: "black"
+                transform: [
+                    Scale { yScale: 0.5 },
+                    Rotation { angle: -45 },
+                    Translate { x: column.recSize; y: 1.5 * column.recSize }
+                ]
+            }
+
+            // Task 7
+            Label {
+                x: Theme.horizontalPageMargin
+                text: qsTr("Task 7")
+                color: Theme.secondaryHighlightColor
+                font.pixelSize: Theme.fontSizeExtraLarge
+            }
+
+            Rectangle {
+                id: borderRec
+                width: parent.width
+                height: 3 * column.recSize
+                color: "transparent"
+                property int duration: 2000
+                Rectangle {
+                    id: movingRec
+                    y: 0
+                    width: 0
+                    height: 0
+                    color: "yellow"
+                    SequentialAnimation {
+                        loops: Animation.Infinite
+                        running: true
+                        ParallelAnimation {
+                            PropertyAnimation {
+                                target: movingRec
+                                property: "y"
+                                from: 0
+                                to: 500
+                                duration: borderRec.duration
+                            }
+                            PropertyAnimation {
+                                target: movingRec
+                                property: "width"
+                                from: 0
+                                to: column.recSize
+                                duration: borderRec.duration
+                            }
+                            PropertyAnimation {
+                                target: movingRec
+                                property: "height"
+                                from: 0
+                                to: column.recSize
+                                duration: borderRec.duration
+                            }
+                            RotationAnimation {
+                                target: movingRec
+                                from: 0
+                                to: 360
+                                duration: borderRec.duration
+                            }
+                        }
+                        ParallelAnimation {
+                            PropertyAnimation {
+                                target: movingRec
+                                property: "y"
+                                from: 500
+                                to: 0
+                                duration: borderRec.duration
+                            }
+                            PropertyAnimation {
+                                target: movingRec
+                                property: "width"
+                                from: column.recSize
+                                to: 0
+                                duration: borderRec.duration
+                            }
+                            PropertyAnimation {
+                                target: movingRec
+                                property: "height"
+                                from: column.recSize
+                                to: 0
+                                duration: borderRec.duration
+                            }
+                            RotationAnimation {
+                                target: movingRec
+                                from: 360
+                                to: 0
+                                duration: borderRec.duration
+                            }
+                        }
+                    }
+                }
+            }
+
+            Rectangle {
+                height: column.recSize
+                width: column.recSize
+                color: "transparent"
             }
         }
     }
