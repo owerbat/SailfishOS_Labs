@@ -6,8 +6,11 @@ Page {
     id: page
 
     function loadInfo() {
+//        var params = 'q=' + encodeURIComponent(input) + '&target=' + encodeURIComponent(target)
+//        lb.text = lb.text + params
         var xhr = new XMLHttpRequest();
-        xhr.open('GET', "http://www.cbr.ru/scripts/XML_daily.asp", true);
+//        xhr.open("GET", "http://www.cbr.eu/scripts/XML_daily.asp", true);
+        xhr.open("GET", "https://www.cbr-xml-daily.ru/daily_utf8.xml", true);
         xhr.onreadystatechange = function() {
             if (xhr.readyState === XMLHttpRequest.DONE) {
                 xmlmodel.xml = xhr.responseText;
@@ -29,8 +32,9 @@ Page {
         model: xmlmodel
         spacing: 10
         delegate: Column {
-            Label { width: parent.width; wrapMode: Text.WordWrap; text: Name }
-            Label { width: parent.width; wrapMode: Text.WordWrap; text: Value }
+            width: parent.width
+            Label { width: parent.width; text: Name }
+            Label { width: parent.width; text: Value }
         }
     }
 
